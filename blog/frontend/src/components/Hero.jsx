@@ -12,6 +12,7 @@ function Hero() {
 <h1 className='lg:text-2xl    text-md   font-semibold my-3  ml-3 font-serif'>Technology and Transformation: Redefining the Modern Workplace</h1>
 <p className='ml-3 text-sm '>Explores how innovation is revolutionizing work environments, practices, and productivity.
 </p>
+
       </div>
       </div>
    </div>

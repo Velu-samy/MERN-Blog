@@ -3,7 +3,7 @@ import { FaSearch, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Navbar.css";
-import LogoutButton from "./Logoutbutton";
+import Logoutbutton from "./Logoutbuuton";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +56,7 @@ function Navbar() {
             {username ? (
               <motion.div animate={{ y: 0, opacity: 1 }} initial={{ y: -10, opacity: 0 }} transition={{ duration: 0.6, delay: 1 }} className="flex items-center gap-3">
                 <p className="text-purple-500 font-medium">{username}</p>
-                <LogoutButton />
+                <Logoutbutton/>
               </motion.div>
             ) : (
             <motion.div animate={{ y: 0, opacity: 1 }} initial={{ y: -10, opacity: 0 }} transition={{ duration: 0.8, delay: 1 }} >
@@ -88,7 +88,7 @@ function Navbar() {
             {username ? (
               <div className="flex items-center gap-3">
                 <p className="text-white font-medium">{username}</p>
-                <LogoutButton />
+                <Logoutbutton/>
               </div>
             ) : (
               <Link to="/register">

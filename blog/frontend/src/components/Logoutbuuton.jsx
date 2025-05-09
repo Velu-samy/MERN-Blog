@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LogoutButton = () => {
+const Logoutbutton = () => {
     const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
@@ -19,4 +19,4 @@ const LogoutButton = () => {
     ) : null; // Hide button after logout
 };
 
-export default LogoutButton;
+export default Logoutbutton;

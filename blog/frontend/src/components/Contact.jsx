@@ -67,7 +67,6 @@ function Contact() {
              <p className='text-center lg:w-3/4  p-4  mt-10'>If you have any questions, concerns, or would like to report an issue related to our blog, feel free to reach out to us. Whether it's a suggestion, feedback, or a request for updates, we are here to assist you. Simply fill out the contact form with your details and query, and we will get back to you as soon as possible. Your input helps us improve and provide better content. We appreciate your time and look forward to helping you!  </p>
 
 </motion.div>
-
   <div className='flex  flex-col-reverse    lg:flex-row   lg:px-28 py-10     justify-evenly bg-white  lg:gap-16 gap-5 items-center'  >
  
   <motion.div  animate={{opacity:1,x:0}} initial={{opacity:0,x:-100}}  transition={{duration:0.5,delaay:0.2}} className="lg:w-1/2 lg:mx-auto lg:p-6 shadow-lg w-full px-10 pb-10 rounded-lg">
