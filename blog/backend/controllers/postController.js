@@ -1,5 +1,5 @@
-const Post = require("../models/Post");
-const Contact = require("../models/Contact");
+const Post = require("../models/Posts");
+const Contact = require("../models/Contacts");
 const multer = require("multer");
 
 // Multer storage configuration
