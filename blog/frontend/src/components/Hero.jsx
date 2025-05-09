@@ -1,6 +1,5 @@
 import React from 'react'
 import './Hero.css';
-import LogoutButton from './Logoutbutton';
 
 function Hero() {
 
