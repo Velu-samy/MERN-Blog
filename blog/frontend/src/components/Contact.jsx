@@ -28,7 +28,7 @@ function Contact() {
     setFormData({
       username : '',
       query:'',
-      mail:''
+      email:''
     });
 
     // Add your API logic here to handle contact form submissions
@@ -101,9 +101,9 @@ function Contact() {
         <div>
           <label className="block text-sm font-medium text-gray-700">Mail</label>
           <input
-            name="mail"
+            name="email"
             type='mail'
-            value={formData.mail}
+            value={formData.email}
             onChange={handleChange}
             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
