@@ -1,4 +1,4 @@
-const Post = require("../models/Posts");
+const Post = require("../models/posts");
 const Contact = require("../models/Contacts");
 const multer = require("multer");
 
