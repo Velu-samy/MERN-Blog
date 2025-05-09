@@ -35,10 +35,10 @@ exports.getsinglepost = async (req, res) => {
 
 exports.Createdetails = async(req,res) =>{
     try {
-        const {username,query,mail} = req.body;
+        const {username,query,email} = req.body;
         const newconatct = new Contact({
             username,
-            mail,
+            email,
             query
         });
      await newconatct.save();

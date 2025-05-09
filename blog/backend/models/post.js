@@ -12,4 +12,4 @@ const PostSchema = new mongoose.Schema({
      // Add username field
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Posts", PostSchema);

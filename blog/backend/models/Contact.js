@@ -6,4 +6,4 @@ email:{type:String,require:true},
 
 });
 
-module.exports = mongoose.model("contact",Contact);
+module.exports = mongoose.model("contacts",Contact);
