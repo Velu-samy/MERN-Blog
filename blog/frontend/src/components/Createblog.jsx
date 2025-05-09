@@ -53,7 +53,7 @@ function Createblog() {
         }
 
         try {
-            const response = await axios.post("http://127.0.0.1:5000/api/posts/create", postData, {
+            const response = await axios.post("https://mern-blog-vz8i.onrender.com/api/posts/create", postData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`,

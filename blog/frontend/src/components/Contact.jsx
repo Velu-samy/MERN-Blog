@@ -37,7 +37,7 @@ function Contact() {
 
   const addedquery = async () => {
   try {
-    const res = await axios.post("http://localhost:5000/api/posts/query", formData);
+    const res = await axios.post("https://mern-blog-vz8i.onrender.com/api/posts/query", formData);
     console.log("Query saved:", res.data);
     if(res){
       

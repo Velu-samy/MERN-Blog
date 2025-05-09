@@ -14,7 +14,7 @@ function Reviewpost() {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:5000/api/posts/${id}`);
+                const response = await axios.get(`https://mern-blog-vz8i.onrender.com/api/posts/${id}`);
                 setPost(response.data);
             } catch (err) {
                 setError("❌ Post not found or server error.");
@@ -41,7 +41,7 @@ function Reviewpost() {
                     {/* Post Image */}
                     <div className="w-full h-96 overflow-hidden rounded-md">
                         <img
-                                       src={post.img ? `http://localhost:5000/${post.img.replace(/\\/, "/")}` : fallbackImage}
+                                       src={post.img ? `https://mern-blog-vz8i.onrender.com/${post.img.replace(/\\/, "/")}` : fallbackImage}
                           
                             alt={post.title}
                             className="w-full h-full object-cover"

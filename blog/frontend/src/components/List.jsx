@@ -10,7 +10,7 @@ function List() {
   // Fetch posts from the backend
   const fetchPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/posts"); // Public route (no auth needed)
+      const response = await axios.get("https://mern-blog-vz8i.onrender.com/api/posts"); // Public route (no auth needed)
       setPosts(response.data); // Store posts in state
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -36,7 +36,7 @@ function List() {
             {/* Display Post Image */}
             <div className="img-container w-96 h-64 overflow-hidden">
               <img
-             src={item.img ? `http://localhost:5000/${item.img.replace(/\\/g, "/")}` : fallbackImage}
+             src={item.img ? `https://mern-blog-vz8i.onrender.com/${item.img.replace(/\\/g, "/")}` : fallbackImage}
                 alt={item.title}
                 className="w-full object-cover object-contain rounded-sm"
                 onError={(e) => {

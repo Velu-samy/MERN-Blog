@@ -25,7 +25,7 @@ function Register() {
         }
 
         try {
-            const response = await axios.post("http://localhost:5000/api/users/register", userData);
+            const response = await axios.post("https://mern-blog-vz8i.onrender.com/api/users/register", userData);
             setSuccess(response.data.message);
             setError("");
             setTimeout(() => navigate("/signin"), 2000); // Redirect after success
