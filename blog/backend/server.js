@@ -17,7 +17,8 @@ const app = express();
 // ✅ Middleware for parsing request body
 app.use(express.json()); // Parses JSON requests
 app.use(express.urlencoded({ extended: true })); // Parses form data
-app.use(cors());
+app.use(cors({ origin: "https://mern-blog-f.onrender.com" }));
+
 
 // ✅ Multer Configuration (Ensure correct field name)
 const storage = multer.diskStorage({
