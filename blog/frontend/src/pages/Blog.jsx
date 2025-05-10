@@ -43,7 +43,7 @@ function Blog() {
                    >
                   <div className="img-container w-96 h-64 overflow-hidden">
            <img
-            src={item.imgage}
+            src={item.image}
              alt={item.title}
              className="w-full object-cover object-contain    rounded-sm"
            />

@@ -49,31 +49,56 @@ exports.Createdetails = async(req,res) =>{
     }
 };
 
-const upload = multer({ storage });
+const cloudinary = require("../config/cloudinary");
+
+
 exports.createPost = async (req, res) => {
     try {
-
         const { title, desc, category } = req.body;
-        const img = req.file && req.file.path ? req.file.path : "uploads/default.jpg";
 
-        const newPost = new Post({
-            title,
-            desc,
-            category,
-            img,
-            userId: req.user.userId,
-            username: req.user.username
-        });
+        if (!title || !desc || !category) {
+            return res.status(400).json({ error: "Title, description, and category are required" });
+        }
 
-        await newPost.save();
-      
-        res.status(201).json(newPost);
+        if (!req.file) {
+            return res.status(400).json({ error: "Image file is required" });
+        }
+
+        console.log("📌 Uploaded File:", req.file);
+
+        // 🔹 Upload image directly to Cloudinary
+        const result = await cloudinary.uploader.upload_stream(
+            { folder: "mern_blog_images", resource_type: "image" },
+            async (error, result) => {
+                if (error) {
+                    console.error("🚨 Cloudinary Upload Error:", error);
+                    return res.status(500).json({ error: "Image upload failed" });
+                }
+
+                console.log("📌 Cloudinary Upload Result:", result);
+
+                const newPost = new Post({
+                    title,
+                    desc,
+                    category,
+                    image: result.secure_url, // ✅ Stores Cloudinary URL instead of local path
+                    userId: req.user?.userId,
+                    username: req.user?.username,
+                });
+
+                await newPost.save();
+
+                res.status(201).json({ message: "Post created successfully", post: newPost });
+            }
+        );
+
+        result.end(req.file.buffer); // ✅ Sends image **buffer** instead of file path
+
     } catch (error) {
-        console.error("Error Creating Post:", error);
-        res.status(400).json({ message: error.message });
+        console.error("🚨 Error Creating Post:", error);
+        res.status(500).json({ error: error.message || "Server error, try again later" });
     }
 };
-
 
 exports.getUserPosts = async (req, res) => {
     try {
