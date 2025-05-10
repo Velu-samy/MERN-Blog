@@ -9,7 +9,7 @@ const Logoutbutton = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
         setIsLoggedIn(false); // Update login status
-        navigate("/signin"); // Redirect to sign-in page
+        navigate("/"); // Redirect to sign-in page
     };
 
     return isLoggedIn ? (
