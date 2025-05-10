@@ -33,7 +33,7 @@ function Blog() {
       <>
           <Navbar/>
           <Banner4/>
-            <div className="overflow-hidden flex mx-10 items-center flex-col">
+            <div className="overflow-hidden flex mx-10 items-center p-5 flex-col">
                <motion.h1    whileInView={{opacity:1,y:0}} initial={{opacity:0,y:-20}}  transition={{duration:1,delaay:0.2}} className="mt-20 text-4xl font-thin">Blogs</motion.h1>
                <div className="list-container flex-wrap p-7 px-36 items-center flex justify-between gap-10">
                  {posts.map((item, index) => (

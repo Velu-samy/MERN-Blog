@@ -61,7 +61,7 @@ function Contact() {
   <>
  <Navbar/>
  {
-   res &&   <p className='text-base lg:left-1/3 mt-14 lg:mt-10    z-10 p-2 lg:top-60 top-96    lg:p-2  p-1 font-serif text-center  absolute text-purple-400'>Thank you for reaching out! Your message has been submitted :) </p>
+       res &&   <p className='text-base lg:left-1/3  lg:mt-10      z-10 p-2 lg:top-60 top-1/3 mt-32   lg:p-2  p-1 font-serif text-center  absolute text-purple-400'>Thank you for reaching out! Your message has been submitted :) </p>
       }  
 <motion.div animate={{y:0,opacity:1}}  initial={{y:-10,opacity:0}} transition={{duration:0.5,delay:0.3}}    className='flex justify-center'>
              <p className='text-center lg:w-3/4  p-4  mt-10'>If you have any questions, concerns, or would like to report an issue related to our blog, feel free to reach out to us. Whether it's a suggestion, feedback, or a request for updates, we are here to assist you. Simply fill out the contact form with your details and query, and we will get back to you as soon as possible. Your input helps us improve and provide better content. We appreciate your time and look forward to helping you!  </p>

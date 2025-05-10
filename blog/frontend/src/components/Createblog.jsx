@@ -12,18 +12,16 @@ function CreateBlog() {
         image: null,
         imagePreview: null,
     });
+    const [loading, setLoading] = useState(false); // 🟣 Loader state
 
-    // ✅ Retrieve user details safely
     const userId = localStorage.getItem("userId") || "";
     const author = localStorage.getItem("username") || "Guest";
     const token = localStorage.getItem("token");
 
-    // ✅ Handle input changes dynamically
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // ✅ Handle image selection & preview
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -35,7 +33,6 @@ function CreateBlog() {
         }
     };
 
-    // ✅ Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -43,6 +40,8 @@ function CreateBlog() {
             alert("❌ Missing required fields!");
             return;
         }
+
+        setLoading(true); // 🟣 Start loader
 
         const postData = new FormData();
         postData.append("title", formData.title);
@@ -52,7 +51,7 @@ function CreateBlog() {
         postData.append("author", author);
 
         if (formData.image) {
-            postData.append("image", formData.image); // ✅ Ensure backend expects `"image"`
+            postData.append("image", formData.image);
         }
 
         try {
@@ -70,7 +69,6 @@ function CreateBlog() {
             alert("✅ Blog created successfully!");
             console.log(response.data);
 
-            // ✅ Reset form after successful submission
             setFormData({
                 title: "",
                 desc: "",
@@ -82,12 +80,13 @@ function CreateBlog() {
         } catch (error) {
             console.error("❌ Error creating post:", error.response?.data || error.message);
             alert("❌ Failed to create blog post.");
+        } finally {
+            setLoading(false); // 🟣 Stop loader
         }
     };
 
     return (
         <>
-            <Navbar />
             <div className="flex justify-center items-center mb-20">
                 <div className="lg:px-11 py-20 bg-white shadow-2xl lg:w-3/5 w-full p-4 rounded-lg">
                     <motion.div animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: -50 }} transition={{ duration: 0.5 }}>
@@ -99,14 +98,12 @@ function CreateBlog() {
                     </motion.div>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* ✅ Title Input */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Title</label>
                             <input type="text" name="title" value={formData.title} onChange={handleChange}
                                 placeholder="Enter post title" className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required />
                         </div>
 
-                        {/* ✅ Description Input */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Description</label>
                             <textarea name="desc" value={formData.desc} onChange={handleChange}
@@ -114,7 +111,6 @@ function CreateBlog() {
                                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required></textarea>
                         </div>
 
-                        {/* ✅ Category Dropdown */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Category</label>
                             <select name="category" value={formData.category} onChange={handleChange}
@@ -123,7 +119,6 @@ function CreateBlog() {
                             </select>
                         </div>
 
-                        {/* ✅ Image Upload */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Upload Image</label>
                             <input type="file" name="image" accept="image/*" onChange={handleImageChange}
@@ -133,16 +128,20 @@ function CreateBlog() {
                             )}
                         </div>
 
-                        {/* ✅ Submit Button */}
-                        <div>
+                        <div className="relative">
+                            {loading && (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="loader border-t-4 border-purple-600 border-solid rounded-full w-8 h-8 animate-spin"></div>
+                                </div>
+                            )}
                             <button type="submit" className="w-full px-4 py-2 text-white bg-purple-600 hover:bg-purple-700 rounded-md shadow">
-                                Create Post
+                                {loading ? "Creating Post..." : "Create Post"}
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
-            <Footer />
+
         </>
     );
 }
