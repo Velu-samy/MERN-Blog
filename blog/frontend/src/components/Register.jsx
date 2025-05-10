@@ -19,7 +19,7 @@ function Register() {
             setError("All fields are required!");
             return;
         }
-        if (userData.password.length < 8) {
+        if (userData.password.length >= 8) {
             setError("Password must be at least 8 characters!");
             return;
         }
@@ -28,7 +28,7 @@ function Register() {
             const response = await axios.post("https://mern-blog-vz8i.onrender.com/api/users/register", userData);
             setSuccess(response.data.message);
             setError("");
-            setTimeout(() => navigate("/singin"), 2000); // Redirect after success
+            setTimeout(() => navigate("/login"), 2000); // Redirect after success
         } catch (err) {
             setError(err.response?.data?.message || "Registration failed!");
         }
