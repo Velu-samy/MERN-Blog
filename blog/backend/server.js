@@ -20,15 +20,8 @@ app.use(express.json()); // Parses JSON requests
 app.use(express.urlencoded({ extended: true })); // Parses form data
 
 
-
-const allowedOrigins = [
-    "https://mern-blog-f.onrender.com",
-    "https://mern-blog-vz8i.onrender.com",
-    "http://localhost:5173"
-];
-
 app.use(cors({
-    origin: allowedOrigins, // ✅ Allows requests from multiple origins
+    origin: ["https://mern-blog-vz8i.onrender.com", "http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));

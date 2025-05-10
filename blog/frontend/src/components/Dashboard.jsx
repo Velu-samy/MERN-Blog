@@ -59,7 +59,7 @@ export default function nDashboard() {
         if (!token) return;
 
         try {
-            await axios.delete(`http://localhost:5000/api/posts/delete/${postId}`, {
+            await axios.delete(`https://mern-blog-vz8i.onrender.com/api/posts/delete/${postId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setPosts(posts.filter((post) => post._id !== postId));
@@ -86,7 +86,7 @@ export default function nDashboard() {
             console.log("🔄 Updating Post:", editPost._id);
 
             const response = await axios.put(
-                `http://localhost:5000/api/posts/update/${editPost._id}`,
+                `https://mern-blog-vz8i.onrender.com/api/posts/update/${editPost._id}`,
                 editFormData,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
