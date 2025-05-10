@@ -13,7 +13,7 @@ const Logoutbutton = () => {
     };
 
     return isLoggedIn ? (
-        <button onClick={handleLogout} className=" text-black px-3 py-1 border border-black rounded hover:bg-purple-500 transition duration-200">
+        <button onClick={handleLogout} className="border-purple-400   hover:bg-purple-400 text-black px-3 py-1 border border-black rounded hover:bg-purple-500 transition duration-200">
             Logout
         </button>
     ) : null; // Hide button after logout

@@ -13,7 +13,7 @@ function Navbar() {
     const handleLogout = () => {
         localStorage.removeItem("username"); // ✅ Remove user from localStorage
         setUsername(""); // ✅ Update state instantly
-        navigate("/login"); // ✅ Redirect after logout
+        navigate("/"); // ✅ Redirect after logout
     };
 
     useEffect(() => {
