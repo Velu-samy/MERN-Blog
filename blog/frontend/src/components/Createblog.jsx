@@ -27,7 +27,7 @@ function Createblog() {
         if (file) {
             setFormData({
                 ...formData,
-                img: file, // ✅ Changed to "img"
+                image: file, // ✅ Changed to "img"
                 imagePreview: URL.createObjectURL(file),
             });
         }
@@ -48,8 +48,8 @@ function Createblog() {
         postData.append("userId", userId);
         postData.append("author", author);
 
-        if (formData.img) {
-            postData.append("img", formData.img); // ✅ Ensure backend expects "img"
+        if (formData.image) {
+            postData.append("image", formData.image); // ✅ Ensure backend expects "img"
         }
 
         try {
@@ -67,7 +67,7 @@ function Createblog() {
                 title: "",
                 desc: "",
                 category: "Technology",
-                img: null,
+                image: null,
                 imagePreview: null,
             });
         } catch (error) {
@@ -113,7 +113,7 @@ function Createblog() {
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Upload Image</label>
-                            <input type="file" name="img" accept="image/*" onChange={handleImageChange} // ✅ "image" changed to "img"
+                            <input type="file" name="image" accept="image/*" onChange={handleImageChange} // ✅ "image" changed to "img"
                                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                             {formData.imagePreview && (
                                 <img src={formData.imagePreview} alt="Preview" className="mt-2 max-w-full h-32 rounded-md shadow-md" />
