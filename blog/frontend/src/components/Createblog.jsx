@@ -9,7 +9,7 @@ function Createblog() {
         title: "",
         desc: "", // ✅ Changed "description" to "desc"
         category: "Technology",
-        img: null, // ✅ Changed "image" to "img"
+        image: null, // ✅ Changed "image" to "img"
         imagePreview: null,
     });
 
