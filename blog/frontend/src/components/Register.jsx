@@ -19,7 +19,7 @@ function Register() {
             setError("All fields are required!");
             return;
         }
-        if (userData.password.length < 8) {
+        if (userData.password.length >= 8) {
             setError("Password must be at least 8 characters!");
             return;
         }
@@ -73,7 +73,7 @@ function Register() {
 
                     <button
                         type="submit"
-                        className="w-full bg-purple-500 text-white py-2 rounded-md hover:bg-purple-600 transition duration-200"
+                        className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200"
                     >
                         Register
                     </button>

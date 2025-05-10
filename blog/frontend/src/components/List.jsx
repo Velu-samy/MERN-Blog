@@ -22,7 +22,7 @@ function List() {
   }, []);
 
   return (
-    <div className="overflow-hidden flex p-5 items-center flex-col">
+    <div className="overflow-hidden flex items-center flex-col">
       <h1 className="mt-20 text-4xl font-thin">Blogs</h1>
       <div className="list-container flex-wrap p-7 px-36 items-center flex justify-evenly gap-24">
         {posts.slice(0,3).map((item, index) => (

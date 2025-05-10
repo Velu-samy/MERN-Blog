@@ -110,7 +110,7 @@ export default function nDashboard() {
                     {posts.length === 0 ? (
                         <p className="text-center text-gray-600">You haven't created any posts yet.</p>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-3  lg:grid-cols-4 justify-center       gap-4  gap-6 mt-6">
+                        <div className="grid grid-cols-1 md:grid-cols-3  lg:flex lg:justify-center gap-4  flex-wrap gap-6 mt-6">
                             {posts.map(post => (
                                 <div key={post._id} className="bg-gray-200 p-4 rounded-lg shadow-md">
                                     <h4 className="font-bold text-lg">{post.title}</h4>
