@@ -41,7 +41,7 @@ function Reviewpost() {
                     {/* Post Image */}
                     <div className="w-full h-96 overflow-hidden rounded-md">
                         <img
-                                       src={post.img ? `https://mern-blog-vz8i.onrender.com/${post.img.replace(/\\/, "/")}` : fallbackImage}
+                                       src={post.image}
                           
                             alt={post.title}
                             className="w-full h-full object-cover"

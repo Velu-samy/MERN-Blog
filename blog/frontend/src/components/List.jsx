@@ -36,7 +36,7 @@ function List() {
             {/* Display Post Image */}
             <div className="img-container w-96 h-64 overflow-hidden">
               <img
-             src={item.img ? `https://mern-blog-vz8i.onrender.com/${item.img.replace(/\\/g, "/")}` : fallbackImage}
+             src={item.image}
                 alt={item.title}
                 className="w-full object-cover object-contain rounded-sm"
                 onError={(e) => {
