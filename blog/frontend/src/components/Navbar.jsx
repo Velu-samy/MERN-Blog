@@ -84,7 +84,7 @@ function Navbar() {
                     initial={{ x: -100, opacity: 0 }} 
                     animate={{ x: 0, opacity: 1 }} 
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="forphone     lg:hidden flex flex-col  w-64 bg-purple-500 absolute top-0 left-0 py-4"
+                    className="forphone   z-10  lg:hidden flex flex-col  w-64 bg-purple-500 absolute top-0 left-0 py-4"
                 >
                     <ul className="flex flex-col items-center gap-16 mt-10 font-serif">
                         <li><Link className="hover:text-purple-400" to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
