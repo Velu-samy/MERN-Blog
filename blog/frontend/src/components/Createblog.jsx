@@ -12,47 +12,42 @@ function CreateBlog() {
         image: null,
         imagePreview: null,
     });
-    const [loading, setLoading] = useState(false); // 🟣 Loader state
+    const [loading, setLoading] = useState(false);
 
     const userId = localStorage.getItem("userId") || "";
     const author = localStorage.getItem("username") || "Guest";
     const token = localStorage.getItem("token");
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value }));
     };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setFormData({
-                ...formData,
+            setFormData((prevData) => ({
+                ...prevData,
                 image: file,
                 imagePreview: URL.createObjectURL(file),
-            });
+            }));
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!token || !userId || !formData.title.trim() || !formData.desc.trim()) {
             alert("❌ Missing required fields!");
             return;
         }
 
-        setLoading(true); // 🟣 Start loader
+        setLoading(true);
 
         const postData = new FormData();
-        postData.append("title", formData.title);
-        postData.append("desc", formData.desc);
-        postData.append("category", formData.category);
+        Object.entries(formData).forEach(([key, value]) => {
+            if (key !== "imagePreview" && value) postData.append(key, value);
+        });
         postData.append("userId", userId);
         postData.append("author", author);
-
-        if (formData.image) {
-            postData.append("image", formData.image);
-        }
 
         try {
             const response = await axios.post(
@@ -68,7 +63,6 @@ function CreateBlog() {
 
             alert("✅ Blog created successfully!");
             console.log(response.data);
-
             setFormData({
                 title: "",
                 desc: "",
@@ -76,40 +70,45 @@ function CreateBlog() {
                 image: null,
                 imagePreview: null,
             });
-
         } catch (error) {
             console.error("❌ Error creating post:", error.response?.data || error.message);
             alert("❌ Failed to create blog post.");
         } finally {
-            setLoading(false); // 🟣 Stop loader
+            setLoading(false);
         }
     };
 
     return (
         <>
+            <Navbar />
             <div className="flex justify-center items-center mb-20">
                 <div className="lg:px-11 py-20 bg-white shadow-2xl lg:w-3/5 w-full p-4 rounded-lg">
                     <motion.div animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: -50 }} transition={{ duration: 0.5 }}>
                         <h1 className="text-4xl font-bold mb-6 text-center">Create a Blog</h1>
                     </motion.div>
 
-                    <motion.div animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: -50 }} transition={{ duration: 0.5, delay: 0.8 }}>
+                    <motion.div animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0 }} transition={{ duration: 0.5, delay: 0.3 }}>
                         <p className="my-10 text-center">Start sharing your thoughts and ideas with the world!</p>
                     </motion.div>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Title</label>
-                            <input type="text" name="title" value={formData.title} onChange={handleChange}
-                                placeholder="Enter post title" className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">Description</label>
-                            <textarea name="desc" value={formData.desc} onChange={handleChange}
-                                placeholder="Enter post description" rows="4"
-                                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required></textarea>
-                        </div>
+                        {[
+                            { label: "Title", name: "title", type: "text", placeholder: "Enter post title" },
+                            { label: "Description", name: "desc", type: "textarea", placeholder: "Enter post description" },
+                        ].map(({ label, name, type, placeholder }) => (
+                            <div key={name}>
+                                <label className="block text-sm font-medium text-gray-700">{label}</label>
+                                {type === "textarea" ? (
+                                    <textarea name={name} value={formData[name]} onChange={handleChange}
+                                        placeholder={placeholder} rows="4"
+                                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required />
+                                ) : (
+                                    <input type={type} name={name} value={formData[name]} onChange={handleChange}
+                                        placeholder={placeholder}
+                                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required />
+                                )}
+                            </div>
+                        ))}
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Category</label>
@@ -128,6 +127,9 @@ function CreateBlog() {
                             )}
                         </div>
 
+                        {/* 🟢 Preserve Paragraph Formatting by Converting Newlines to <br> */}
+                        <div dangerouslySetInnerHTML={{ __html: formData.desc.replace(/\n/g, "<br />") }} />
+
                         <div className="relative">
                             {loading && (
                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -141,6 +143,7 @@ function CreateBlog() {
                     </form>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

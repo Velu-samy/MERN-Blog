@@ -4,33 +4,44 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
+
+        // Check if username or email already exists
+        const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+        if (existingUser) {
+            return res.status(400).json({ message: "Username or Email is already in use" });
+        }
+
+        // Create new user
         const user = new User({ username, email, password });
         await user.save();
+
         res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: "Server error: " + error.message });
     }
 };
 
 exports.login = async (req, res) => {
     try {
-
-        
         const { username, password } = req.body;
+
+        // Find user by username
         const user = await User.findOne({ username });
 
-
         if (!user || user.password !== password) {
-            console.log("Invalid credentials.");
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        // Generate JWT token
+        const token = jwt.sign(
+            { userId: user._id, username: user.username },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
 
         res.json({ token, username: user.username, userId: user._id });
-
     } catch (error) {
         console.error("Error during login:", error);
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: "Server error, please try again later" });
     }
 };

@@ -27,9 +27,9 @@ function List() {
       <div className="list-container flex-wrap p-7 px-36 items-center flex justify-evenly gap-24">
         {posts.slice(0,3).map((item, index) => (
           <motion.div
-            whileInView={{ opacity: 1 }}
-            initial={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            whileInView={{   opacity: 1 }}
+            initial={{ opacity: 0  }}
+            transition={{ duration: 0.3, delay: 0.2 }}
             key={index}
             className="list-box shadow-xl overflow-hidden hover:shadow-2xl transition duration-1000 py-3 flex flex-col w-80"
           >

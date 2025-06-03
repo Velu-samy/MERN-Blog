@@ -55,48 +55,44 @@ const cloudinary = require("../config/cloudinary");
 exports.createPost = async (req, res) => {
     try {
         const { title, desc, category } = req.body;
+        const userId = req.user?.userId;
+        const username = req.user?.username;
 
+        // ✅ Validate required fields
         if (!title || !desc || !category) {
-            return res.status(400).json({ error: "Title, description, and category are required" });
+            return res.status(400).json({ error: "Title, description, and category are required." });
         }
-
         if (!req.file) {
-            return res.status(400).json({ error: "Image file is required" });
+            return res.status(400).json({ error: "Image file is required." });
         }
 
         console.log("📌 Uploaded File:", req.file);
 
-        // 🔹 Upload image directly to Cloudinary
-        const result = await cloudinary.uploader.upload_stream(
-            { folder: "mern_blog_images", resource_type: "image" },
-            async (error, result) => {
-                if (error) {
-                    console.error("🚨 Cloudinary Upload Error:", error);
-                    return res.status(500).json({ error: "Image upload failed" });
-                }
+        // ✅ Upload Image to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path, {
+            folder: "mern_blog_images",
+            resource_type: "image",
+        });
 
-                console.log("📌 Cloudinary Upload Result:", result);
+        console.log("📌 Cloudinary Upload Result:", result);
 
-                const newPost = new Post({
-                    title,
-                    desc,
-                    category,
-                    image: result.secure_url, // ✅ Stores Cloudinary URL instead of local path
-                    userId: req.user?.userId,
-                    username: req.user?.username,
-                });
+        // ✅ Create new post object
+        const newPost = new Post({
+            title,
+            desc,
+            category,
+            image: result.secure_url, // ✅ Stores Cloudinary URL instead of local path
+            userId,
+            username,
+        });
 
-                await newPost.save();
+        await newPost.save();
 
-                res.status(201).json({ message: "Post created successfully", post: newPost });
-            }
-        );
-
-        result.end(req.file.buffer); // ✅ Sends image **buffer** instead of file path
+        res.status(201).json({ message: "✅ Post created successfully!", post: newPost });
 
     } catch (error) {
         console.error("🚨 Error Creating Post:", error);
-        res.status(500).json({ error: error.message || "Server error, try again later" });
+        res.status(500).json({ error: error.message || "Server error, please try again later." });
     }
 };
 
