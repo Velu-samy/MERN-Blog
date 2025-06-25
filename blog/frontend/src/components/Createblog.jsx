@@ -80,7 +80,7 @@ function CreateBlog() {
 
     return (
         <>
-            <Navbar />
+           
             <div className="flex justify-center items-center mb-20">
                 <div className="lg:px-11 py-20 bg-white shadow-2xl lg:w-3/5 w-full p-4 rounded-lg">
                     <motion.div animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: -50 }} transition={{ duration: 0.5 }}>
